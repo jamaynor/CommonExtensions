@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>1.0.0.1</Version>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>JAMaynor</RootNamespace>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Title>JAMaynor Common Extensions</Title>
+		<Description>A set of extension methods that simplify common tasks in c# (e.g., string.IsNullOrEmpty()).</Description>
+		<Copyright>Jeremy Maynor</Copyright>
+	</PropertyGroup>
+
+</Project>
