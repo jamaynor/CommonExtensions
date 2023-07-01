@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/JAMaynor.CommonExtensions/.vs
+/src/JAMaynor.CommonExtensions/bin
+/src/JAMaynor.CommonExtensions/obj
+/tests/JAMaynor.CommonExtensions.Tests/obj
+/tests/JAMaynor.CommonExtensions.Tests/bin/Release/net6.0
