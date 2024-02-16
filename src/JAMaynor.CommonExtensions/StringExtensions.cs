@@ -51,6 +51,7 @@ namespace JAMaynor
             if (encoding is null) encoding = Encoding.UTF8;
             return encoding.GetBytes(startString!);
         }
+        /// <summary>Encodes all the characters in the specified string into a sequence of bytes.</summary>
         public static byte[] ToBytes(this string? startString) { return ToBytes(startString, Encoding.UTF8); }
 
 
@@ -64,6 +65,7 @@ namespace JAMaynor
             if (encoding is null) encoding = Encoding.UTF8;
             return encoding.GetString(sourceData);
         }
+        /// <summary>Decodes the bytes in an array into a string using a specified encoder.</summary>
         public static string FromBytes(this byte[]? sourceData) { return FromBytes(sourceData, Encoding.UTF8); }
 
 
