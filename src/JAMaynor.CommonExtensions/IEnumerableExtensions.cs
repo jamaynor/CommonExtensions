@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,17 +10,59 @@ namespace JAMaynor
     public static class IEnumerableExtensions
     {
         /// <summary>
-        /// Returns true if an item is found within an IEnumerable<typeparamref name="T"/> based on a linq function (predicate).
+        /// Converts an IEnumerable to a CSV string. Allows you to specify header names and the properties to include in the CSV.
         /// </summary>
-        /// <param name="matchingFunction">A predicate function that evaluates to the match.</param>
-        /// <returns></returns>
-        public static bool Contains<T>(this IEnumerable<T> enumerable, Func<T, bool> matchingFunction)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The IEnumerable that will vbe serialized to CSV.</param>
+        /// <param name="headers">The names of the column headers preferred. (optional)</param>
+        /// <param name="propertyNames">The names of the properties to include. (optional)</param>
+        /// <returns>A csv formatted string containing all items in the source IEnumerable.</returns>
+        /// <exception cref="System.ArgumentNullException">Parameters headers and propertyNames must both be present (or null).</exception>
+        /// <exception cref="System.ArgumentException">Parameters headers and propertyNames must have the same number of elements.</exception>
+        public static string ToCsvString<T>(this IEnumerable<T> source, IList<string>? headers = null, IList<string>? propertyNames = null)
         {
-            foreach (var item in enumerable)
+            if (source == null)
             {
-                if (matchingFunction(item)) return true;
+                throw new ArgumentNullException(nameof(source));
             }
-            return false;
+            if ((headers == null && propertyNames != null) || (headers != null && propertyNames == null))
+            {
+                throw new ArgumentNullException("Parameters headers and propertyNames must bothe be present (or null).");
+            }
+            if (headers != null && propertyNames != null && headers.Count() != propertyNames.Count())
+            {
+                throw new ArgumentException("Parameters headers and propertyNames must have the same number of elements.");
+            }
+
+            if (headers is null) headers = typeof(T).GetProperties().Select(p => p.Name).ToList();
+            if (propertyNames is null) propertyNames = typeof(T).GetProperties().Select(p => p.Name).ToList();
+
+
+            List<PropertyInfo> props = new List<PropertyInfo>();
+
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if (propertyNames.Contains(prop.Name))
+                {
+                    props.Add(prop);
+                }
+            }
+
+
+            // Build the header row
+            var header = string.Join(",", headers);
+
+            // Build the CSV data
+            var builder = new StringBuilder();
+            builder.AppendLine(header);
+
+            foreach (var item in source)
+            {
+                var values = props.Select(p => p.GetValue(item)?.ToString() ?? "");
+                builder.AppendLine(string.Join(",", values));
+            }
+
+            return builder.ToString();
         }
     }
 }

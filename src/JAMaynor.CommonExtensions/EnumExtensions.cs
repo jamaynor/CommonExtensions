@@ -110,7 +110,7 @@ namespace JAMaynor
 
         /// <summary>
         /// Returns the string name of the enum value. For the enum <see cref="ConsoleColor"/>
-        /// the value of '0' will be returned as 'Black'.
+        /// The value of '0' will be returned as 'Black'.
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>

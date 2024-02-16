@@ -32,6 +32,7 @@ namespace JAMaynor
             return isValid;
         }
 
+        /// <summary>Returns true if the string is formatted as a valid phone number.</summary>
         public static bool IsValidPhoneNumber(this string? number)
         {
             if (number.IsNullOrEmpty()) return false;
@@ -75,35 +76,30 @@ namespace JAMaynor
             return Convert.ToBase64String(utf8String.ToBytes());
         }
 
-        /// <summary>Decodes a Base64 string rendering UTF-8 plain text.</summary>        
+        /// <summary>Decodes a Base64 string rendering UTF-8 string.</summary>        
         public static string FromBase64String(this string? base64EncodedData)
         {
-            if (base64EncodedData.IsNullOrEmpty()) return string.Empty;
+            if (base64EncodedData.IsNullOrEmpty()) throw new ArgumentNullException(nameof(base64EncodedData));
 
             return Convert.FromBase64String(base64EncodedData!).FromBytes();
         }
 
 
-        /// <summary>Converts a byte array to a hexidecimal encoded srting.</summary>        
-        public static string ToHexString(this byte[]? data)
-        {
-            if (data is null) return string.Empty;
-            if(data.Length == 0) return string.Empty;
-
-            return Convert.ToHexString(data);
-        }
+        /// <summary>Converts a utf8 encoded string to a hexidecimal encoded string.</summary>                
         public static string ToHexString(this string? utf8String)
         {
-            if (utf8String.IsNullOrEmpty()) return string.Empty;
+            if (utf8String.IsNullOrEmpty()) throw new ArgumentNullException(nameof(utf8String));
 
-            return ToHexString(utf8String.ToBytes());
+            return Convert.ToHexString(utf8String!.ToBytes());
         }
-        /// <summary>Converts a hexidecimal encoded string into a byte array.</summary>        
-        public static byte[] ToHexBytes(this string? hexEncodedString)
+        /// <summary>Converts a hexidecimal encoded string to a utf8 encoded string.</summary>
+        public static string FromHexString(this string? hexString)
         {
-            if (hexEncodedString.IsNullOrEmpty()) return new byte[0];
+            if (hexString.IsNullOrEmpty()) throw new ArgumentNullException(nameof(hexString));
 
-            return Convert.FromHexString(hexEncodedString!);
+            return Convert.FromHexString(hexString!).FromBytes();
         }
+        
+
     }
 }
