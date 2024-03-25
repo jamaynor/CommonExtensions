@@ -8,3 +8,8 @@
 /src/JAMaynor.CommonExtensions/obj
 /tests/JAMaynor.CommonExtensions.Tests/obj
 /tests/JAMaynor.CommonExtensions.Tests/bin/Release/net6.0
+/src/DevJoy.Extensions/.vs
+/src/DevJoy.Extensions/bin
+/src/DevJoy.Extensions/obj
+/tests/DevJoy.Extensions.Tests/bin/Release/net6.0
+/tests/DevJoy.Extensions.Tests/obj
