@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JAMaynor
+namespace DevJoy.Extensions
 {
     public static class IEnumerableExtensions
     {
@@ -17,17 +17,17 @@ namespace JAMaynor
         /// <param name="headers">The names of the column headers preferred. (optional)</param>
         /// <param name="propertyNames">The names of the properties to include. (optional)</param>
         /// <returns>A csv formatted string containing all items in the source IEnumerable.</returns>
-        /// <exception cref="System.ArgumentNullException">Parameters headers and propertyNames must both be present (or null).</exception>
-        /// <exception cref="System.ArgumentException">Parameters headers and propertyNames must have the same number of elements.</exception>
+        /// <exception cref="ArgumentNullException">Parameters headers and propertyNames must both be present (or null).</exception>
+        /// <exception cref="ArgumentException">Parameters headers and propertyNames must have the same number of elements.</exception>
         public static string ToCsvString<T>(this IEnumerable<T> source, IList<string>? headers = null, IList<string>? propertyNames = null)
         {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if ((headers == null && propertyNames != null) || (headers != null && propertyNames == null))
+            if (headers == null && propertyNames != null || headers != null && propertyNames == null)
             {
-                throw new ArgumentNullException("Parameters headers and propertyNames must bothe be present (or null).");
+                throw new ArgumentNullException("Parameters headers and propertyNames must both be present or both be null.");
             }
             if (headers != null && propertyNames != null && headers.Count() != propertyNames.Count())
             {

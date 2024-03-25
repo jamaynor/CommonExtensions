@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace JAMaynor
+namespace DevJoy.Extensions
 {
     public static class StringExtensionMethods
     {
@@ -18,7 +18,7 @@ namespace JAMaynor
         /// <summary>Returns true if the string is formatted as a valid email address.</summary>
         public static bool IsValidEmailAddress(this string? seed)
         {
-            if(seed.IsNullOrEmpty()) return false;
+            if (seed.IsNullOrEmpty()) return false;
 
             bool isValid = false;
             MailAddress address;
@@ -52,7 +52,7 @@ namespace JAMaynor
             return encoding.GetBytes(startString!);
         }
         /// <summary>Encodes all the characters in the specified string into a sequence of bytes.</summary>
-        public static byte[] ToBytes(this string? startString) { return ToBytes(startString, Encoding.UTF8); }
+        public static byte[] ToBytes(this string? startString) { return startString.ToBytes(Encoding.UTF8); }
 
 
 
@@ -60,13 +60,13 @@ namespace JAMaynor
         public static string FromBytes(this byte[]? sourceData, Encoding encoding)
         {
             if (sourceData is null) return string.Empty;
-            if (sourceData.Length== 0) return string.Empty;
+            if (sourceData.Length == 0) return string.Empty;
 
             if (encoding is null) encoding = Encoding.UTF8;
             return encoding.GetString(sourceData);
         }
         /// <summary>Decodes the bytes in an array into a string using a specified encoder.</summary>
-        public static string FromBytes(this byte[]? sourceData) { return FromBytes(sourceData, Encoding.UTF8); }
+        public static string FromBytes(this byte[]? sourceData) { return sourceData.FromBytes(Encoding.UTF8); }
 
 
 
@@ -101,7 +101,5 @@ namespace JAMaynor
 
             return Convert.FromHexString(hexString!).FromBytes();
         }
-        
-
     }
 }

@@ -1,9 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 
-namespace JAMaynor
+namespace DevJoy.Extensions
 {
     public static class EnumExtensions
     {
@@ -15,7 +14,7 @@ namespace JAMaynor
         /// <param name="instance">This enum</param>
         /// <param name="value">Enum value to test</param>
         /// <returns></returns>
-        public static bool EqualsFlag<T>(this T instance, T value) where T: Enum
+        public static bool EqualsFlag<T>(this T instance, T value) where T : Enum
         {
             if (value is null) throw new ArgumentException(nameof(value));
 
